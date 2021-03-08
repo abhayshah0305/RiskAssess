@@ -1,0 +1,31 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+RiskAssess | Login
+{% endblock %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{url_for('static', filename='login.css')}}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+      <form class="form-signin" method="POST" action="/login">
+        <h1 style="text-align:center; text-size:30px">RiskAssess</h1>
+        <p style="text-align:center">Account Login</p>
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.username) }}
+        {{ wtf.form_field(form.password) }}
+        {{ wtf.form_field(form.remember) }}
+        <br/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button><br/>
+        <p style="text-align:center">Don't have an account? <a href="/signup">Sign Up</a></p>
+        <br/>
+        <p style="text-align:center"><a href="/">Back Home</a></p>
+      </form>
+
+    </div> <!-- /container -->
+{% endblock %}
