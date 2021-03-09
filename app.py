@@ -150,7 +150,6 @@ def predict():
                      'single_epithelial_size', 'bare_nuclei', 'bland_chromatin', 'normal_nucleoli', 'mitoses']
     df = pd.DataFrame(features_value, columns=features_name)
     output = model.predict(df)
-
     if output == 4:
         res_val = "Breast cancer"
     else:
