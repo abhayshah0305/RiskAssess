@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash
+from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
@@ -6,6 +6,9 @@ from wtforms.validators import InputRequired, Email, Length, email
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+import pandas as pd
+import pickle
+import numpy as np
 
 
 app = Flask(__name__)
@@ -16,6 +19,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+model = pickle.load(open('model.pkl', 'rb'))
 
 
 class User(UserMixin, db.Model):
@@ -136,6 +140,23 @@ def liver():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    input_features = [int(x) for x in request.form.values()]
+    features_value = [np.array(input_features)]
+    features_name = ['clump_thickness', 'uniform_cell_size', 'uniform_cell_shape', 'marginal_adhesion',
+                     'single_epithelial_size', 'bare_nuclei', 'bland_chromatin', 'normal_nucleoli', 'mitoses']
+    df = pd.DataFrame(features_value, columns=features_name)
+    output = model.predict(df)
+
+    if output == 4:
+        res_val = "Breast cancer"
+    else:
+        res_val = "no Breast cancer"
+
+    return render_template('cancer.html', prediction_text='Patient has {}'.format(res_val))
 
 
 if __name__ == "__main__":
