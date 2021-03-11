@@ -69,21 +69,11 @@ input {
 }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
-
 </style>
-
-
-
 </head>
-
-
-
-
-
 <body>
  <div class="login">
 	<h1> Predicting Diabetes risk </h1>
-
     <form action="{{ url_for('predictt')}}" method="post">
                 <input class="form-input" type="text" name="pregnancies" placeholder="Number of Pregnancies eg. 0 for male"><br>
                 <input class="form-input" type="text" name="glucose" placeholder="Glucose (mg/dL) eg. 80"><br>
