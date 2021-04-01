@@ -15,6 +15,7 @@ from sklearn.model_selection import train_test_split
 
 filename = 'diabetes-prediction-rfc-model.pkl'
 classifier = pickle.load(open(filename, 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
 model1 = pickle.load(open('model1.pkl', 'rb'))
 
 app = Flask(__name__)
@@ -25,7 +26,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
-model = pickle.load(open('model.pkl', 'rb'))
+
 
 
 class User(UserMixin, db.Model):
