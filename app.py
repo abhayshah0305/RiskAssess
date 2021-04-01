@@ -15,7 +15,7 @@ from sklearn.model_selection import train_test_split
 
 filename = 'diabetes-prediction-rfc-model.pkl'
 classifier = pickle.load(open(filename, 'rb'))
-model = pickle.load(open('model1.pkl', 'rb'))
+model1 = pickle.load(open('model1.pkl', 'rb'))
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
@@ -234,7 +234,7 @@ def predictheart():
                      "thal_2", "thal_3"]
 
     df = pd.DataFrame(features_value, columns=features_name)
-    output = model.predict(df)
+    output = model1.predict(df)
 
     if output == 1:
         res_val = "** heart disease **"
