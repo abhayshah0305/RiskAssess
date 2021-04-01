@@ -15,6 +15,7 @@ from sklearn.model_selection import train_test_split
 
 filename = 'diabetes-prediction-rfc-model.pkl'
 classifier = pickle.load(open(filename, 'rb'))
+model = pickle.load(open('model1.pkl', 'rb'))
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
