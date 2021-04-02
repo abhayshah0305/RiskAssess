@@ -1,100 +1,204 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
+<!DOCTYPE html>
+<html>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="../static/img/health.ico">
-    <!-- Bootstrap CSS -->
-    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-    *{
-    margin:0;
-    padding:0;
-    font-family: 'Josefin Sans', sans-serif;
-    }
-    html,
-    body,
-    header,
-    #intro {
-    height: 100%;
-    }
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+    <title>RiskAssess | Kidney Disease Prediction</title>
+</head>
+<style>
+	button
+{
+	border-style:none;
+}
 
-    img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    }
-    </style>
-    <title>Kidney Disease Prediction</title>
-  </head>
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-      </nav>
-      <!--Mask-->
-      <div id="intro" class="container-fluid view ">
-        <h1 class="text-center text-capitalize pt-5">Know your chances of getting a kidney disease in one Click!</h1>
-        <hr class="w-75 mx-auto pt-5">
-        <div class="row mb-5">
-          <div class="col-lg-6 col-md-6 col-12 my-auto">
-            <img src="../static/img/kidney.png" class="float-left">
+h1, h2, h3, h4, h5{
+    text-align: center;
+
+}
+
+form {
+	margin-top: 3%;
+	margin-left: 29%;
+	margin-right: 21%;
+
+}
+
+form fieldset{
+	padding: 30px;
+	border-width: 20px;
+	border-style: groove;
+    border-color: #5a5a5a;
+	background-color: #fff;
+}
+
+fieldset h1 {
+	color: #5a5a5a;
+	padding-bottom: 20px;
+	margin-left: 35px;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 28px;
+	text-align: center;
+}
+
+fieldset label {
+	margin-left: 20px;
+	margin-right: 40px;
+	padding: 23px;
+	font-size: 20px;
+	display: inline-block;
+    width  : 240px;
+}
+fieldset input{
+	padding:8px;
+	color: #938c8c
+}
+fieldset input:focus{
+	color: #000;
+}
+fieldset button
+{
+	margin-left: 60px;
+	color: #fff;
+	background-color: #5a5a5a;
+	border-radius: 3px;
+	padding: 13px 39px;
+	text-align: center;
+	letter-spacing: 0.9px;
+	text-decoration: none;
+	margin-right: 15px;
+	line-height: 26px;
+	font-size: 16px;
+	box-shadow: 0px 1px 3px 0px #5a5a5a;
+	right: 0px;
+	margin-top: 15px;
+}
 
 
-          </div>
-          <div class="col-lg-6 col-md-6 col-12">
-            <form action="{{ url_for('predictkidney')}}" method="post">
-              <div class="form-group">
-                <label for="bp">Blood Pressure</label>
-                <input class="form-control" type="number" id="bp" name="Year" required="required" placeholder="Blood Pressure">
-              </div>
+.submit{
+	margin-left: 60px;
+	color: #fff;
+	background-color: #5a5a5a;
+	border-radius: 3px;
+	padding: 13px 39px;
+	text-align: center;
+	letter-spacing: 0.9px;
+	text-decoration: none;
+	margin-right: 10px;
+	line-height: 26px;
+	font-size: 16px;
+	box-shadow: 0px 1px 3px 0px #5a5a5a;
+	right: 100px;
+	margin-top: 15px;
+}
 
-              <div class="form-group">
-                <label for="sg">Specific Gravity</label>
-                <input class="form-control" type="number" step="any" id="sg" name="sg" required="required" placeholder="Specific Gravity">
-              </div>
+#link_to_edit{
+    padding-left: 45px;
+}
 
-              <div class="form-group">
-                <label for="al">Albumin</label>
-                <input class="form-control" type="number" id="al" name="al" required="required" placeholder="Albumin">
-              </div>
+.fieldset{
+	margin-top: 3%;
+	margin-left: 0%;
+	margin-right: 0%;
+	padding: 30px;
+	border-width: 25px;
+	border-style: ridge;
+	border-color: #257a7a;
+	box-shadow: 6px 13px 13px 0px black;
+	background-color: #ebfffa;
+}
+</style>
+<body>
 
-              <div class="form-group">
-                <label for="su">Blood Sugar Level</label>
-                <input class="form-control" type="number" id="su" name="su" required="required" placeholder="Blood Sugar Level">
-              </div>
+	<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="#"><b>RISK ASSESS</b></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Get Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/disindex">Disease Index</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cancer">Breast Cancer</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/diabetes">Diabetes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/heart">Heart Disease</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/kidney">Kidney Disease</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/liver">Liver Disease</a>
+                    </li>
+                    <li class="nav-item">
+		                <a class="nav-link" href="#">|</a>
+		            </li>
+                    <li class="nav-item">
+		                <a class="nav-link" href="/logout">Logout</a>
+		            </li>
+                    </ul>
+                </div>
+            </nav>
+    </header><br/><br/>
+    <h1 style="text-align:center;">Kidney Disease Prediction</h1>
+    <h5 style="text-align:center;">Please enter the patient details</h5>
 
-              <div class="form-group">
-                <label for="rbc">Red Blood Cells Count</label>
-                <input class="form-control" type="number" id="rbc" name="rbc" required="required" placeholder="Red Blood Cells Count">
-              </div>
+    <form action="{{ url_for('predictkidney')}}" method="post" class="form-inline">
+        <fieldset>
+            <div class="tabcontent" id="new">
+                <div class="form-group">
+                    <label for="bp">Blood Pressure</label>
+                    <input class="form-control" type="number" id="bp" name="Year" required="required" placeholder="Blood Pressure">
+                </div>
 
-              <div class="form-group">
-                <label for="pc">Pus Cell Count</label>
-                <input class="form-control" type="number" id="pc" name="pc" required="required" placeholder="Pus Cell Count">
-              </div>
+                <div class="form-group">
+                    <label for="sg">Specific Gravity</label>
+                    <input class="form-control" type="number" step="any" id="sg" name="sg" required="required" placeholder="Specific Gravity">
+                </div>
 
-              <div class="form-group">
-                <label for="pcc">Pus Cell Clumps</label>
-                <input class="form-control" type="number" id="pcc" name="pcc" required="required" placeholder="Pus Cell Clumps">
-              </div>
+                <div class="form-group">
+                    <label for="al">Albumin</label>
+                    <input class="form-control" type="number" id="al" name="al" required="required" placeholder="Albumin">
+                </div>
 
-              <button type="submit" class="btn btn-danger">Predict</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <!--/.Mask-->
-    </header>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+                <div class="form-group">
+                    <label for="su">Blood Sugar Level</label>
+                    <input class="form-control" type="number" id="su" name="su" required="required" placeholder="Blood Sugar Level">
+                </div>
+
+                <div class="form-group">
+                    <label for="rbc">Red Blood Cells Count</label>
+                    <input class="form-control" type="number" id="rbc" name="rbc" required="required" placeholder="Red Blood Cells Count">
+                </div>
+
+                <div class="form-group">
+                    <label for="pc">Pus Cell Count</label>
+                    <input class="form-control" type="number" id="pc" name="pc" required="required" placeholder="Pus Cell Count">
+                </div>
+
+                <div class="form-group">
+                    <label for="pcc">Pus Cell Clumps</label>
+                    <input class="form-control" type="number" id="pcc" name="pcc" required="required" placeholder="Pus Cell Clumps">
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" class="btn btn-primary btn-lg">Predict</button>
+            </div>
+        </fieldset>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
 </html>
