@@ -1,6 +1,5 @@
 Flask==1.1.2
 Werkzeug==1.0.1
-pandas==1.2.3
 joblib==1.0.1
 flask_bootstrap==3.3.7.1
 flask_login==0.5.0
