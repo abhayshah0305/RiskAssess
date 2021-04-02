@@ -157,9 +157,9 @@ def predict():
     df = pd.DataFrame(features_value, columns=features_name)
     output = model.predict(df)
     if output == 4:
-        res_val = "Breast Cancer"
+        res_val = "a high Risk of Breast Cancer"
     else:
-        res_val = "no Breast Cancer"
+        res_val = "a low Risk of Breast Cancer"
 
     return render_template('cancer_result.html', prediction_text='Patient has {}'.format(res_val))
 
@@ -237,9 +237,9 @@ def predictheart():
     output = model1.predict(df)
 
     if output == 1:
-        res_val = "** heart disease **"
+        res_val = "a high risk of Heart Disease"
     else:
-        res_val = "no heart disease "
+        res_val = "a low risk of Heart Disease"
 
     return render_template('heart_result.html', prediction_text='Patient has {}'.format(res_val))
 
