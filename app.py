@@ -100,37 +100,37 @@ def signup():
 
 
 @app.route("/dashboard")
-# @login_required
+@login_required
 def dashboard():
     return render_template("dashboard.html")
 
 
 @app.route("/disindex")
-# @login_required
+@login_required
 def disindex():
     return render_template("disindex.html")
 
 
 @app.route("/cancer")
-# @login_required
+@login_required
 def cancer():
     return render_template("cancer.html")
 
 
 @app.route("/diabetes")
-# @login_required
+@login_required
 def diabetes():
     return render_template("diabetes.html")
 
 
 @app.route("/heart")
-# @login_required
+@login_required
 def heart():
     return render_template("heart.html")
 
 
 @app.route("/kidney")
-# @login_required
+@login_required
 def kidney():
     return render_template("kidney.html")
 
@@ -159,7 +159,7 @@ def predictkidney():
 
 
 @app.route("/liver")
-# @login_required
+@login_required
 def liver():
     return render_template("liver.html")
 
