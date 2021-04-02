@@ -152,7 +152,7 @@ def predictkidney():
         if len(to_predict_list) == 7:
             result = ValuePredictor(to_predict_list, 7)
     if(int(result) == 1):
-        prediction = "Patient has a high risk of Kidney Disease, Please Consult your doctor immediately"
+        prediction = "Patient has a high risk of Kidney Disease, please consult your doctor immediately"
     else:
         prediction = "Patient has a low risk of Kidney Disease"
     return render_template("kidney_result.html", prediction_text=prediction)
@@ -182,9 +182,9 @@ def predictliver():
             result = ValuePred(to_predict_list, 7)
 
     if int(result) == 1:
-        prediction = "Sorry you chances of getting the disease. Please consult the doctor immediately"
+        prediction = "Patient has a high risk of Liver Disease, please consult your doctor immediately"
     else:
-        prediction = "No need to fear. You have no dangerous symptoms of the disease"
+        prediction = "Patient has a low risk of Kidney Disease"
     return render_template("liver_result.html", prediction_text=prediction)
 
 
