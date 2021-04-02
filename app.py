@@ -1,3 +1,4 @@
+import joblib
 from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
@@ -134,6 +135,29 @@ def kidney():
     return render_template("kidney.html")
 
 
+def ValuePredictor(to_predict_list, size):
+    to_predict = np.array(to_predict_list).reshape(1, size)
+    if(size==7):
+        loaded_model = joblib.load('kidney_model.pkl')
+        result = loaded_model.predict(to_predict)
+    return result[0]
+
+
+@app.route("/predictkidney",  methods=['GET', 'POST'])
+def predictkidney():
+    if request.method == "POST":
+        to_predict_list = request.form.to_dict()
+        to_predict_list = list(to_predict_list.values())
+        to_predict_list = list(map(float, to_predict_list))
+        if len(to_predict_list) == 7:
+            result = ValuePredictor(to_predict_list, 7)
+    if(int(result) == 1):
+        prediction = "Patient has a high risk of Kidney Disease, Please Consult your doctor immediately"
+    else:
+        prediction = "Patient has a low risk of Kidney Disease"
+    return render_template("kidney_result.html", prediction_text=prediction)
+
+
 @app.route("/liver")
 # @login_required
 def liver():
@@ -242,6 +266,8 @@ def predictheart():
 
     return render_template('heart_result.html', prediction_text='Patient has {}'.format(res_val))
 
+
+############################################################################################################
 
 if __name__ == "__main__":
     app.run(debug=True)
