@@ -106,7 +106,7 @@ def dashboard():
 
 
 @app.route("/disindex")
-@login_required
+
 def disindex():
     return render_template("disindex.html")
 
