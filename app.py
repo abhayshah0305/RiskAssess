@@ -157,9 +157,9 @@ def predict():
     df = pd.DataFrame(features_value, columns=features_name)
     output = model.predict(df)
     if output == 4:
-        res_val = "a high Risk of Breast Cancer"
+        res_val = "a high risk of Breast Cancer"
     else:
-        res_val = "a low Risk of Breast Cancer"
+        res_val = "a low risk of Breast Cancer"
 
     return render_template('cancer_result.html', prediction_text='Patient has {}'.format(res_val))
 
